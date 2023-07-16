@@ -1,0 +1,71 @@
+<div class="content" role="main">
+
+  <mat-card class="firstCard">
+
+    <label for="fileInput" class="custom-file-upload" (change)="submitPic($event)">
+      Upload model
+    </label>
+    <mat-card-content>
+      <div class="inputArea">
+        <mat-form-field>
+          <textarea matInput #dnaInput placeholder="Input 60 bp DNA sequence ..."></textarea>
+        </mat-form-field>
+        <p *ngIf="showWarning" style="color: red;">The input must be 60bp.</p>
+
+        <div class="btnBox">
+          <button mat-button  (click)="submitDNA(dnaInput.value)" color="primary">Predict</button>
+
+          <input  type="file"  style="visibility: hidden;" id="fileInput" (change)="submitPic($event)">
+        </div>
+      </div>
+      <mat-tab-group *ngIf="showResult || showStruct">
+        <mat-tab label="Model detail" *ngIf="showStruct">
+
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of struct">
+                <td>{{ item.name }}</td>
+                <td>{{ item.type }}</td>
+                <td>{{ item?.units }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+
+        </mat-tab>
+        <mat-tab label="Prediction result" *ngIf="showResult">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Deletion frequency</th>
+                <th>1bp Insertion Frequency</th>
+                <th>1bp Deletion Frequency</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ dele }}</td>
+                <td>{{ oneIns }}</td>
+                <td>{{ oneDele }}</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </mat-tab>
+      </mat-tab-group>
+
+  </mat-card-content>
+  </mat-card>
+
+
+</div>
